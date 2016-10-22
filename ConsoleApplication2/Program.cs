@@ -34,6 +34,8 @@ namespace ConsoleApplication2
 
                 int izbor = int.Parse(izborKoridoras) - 1;
 
+                brojKoridora[izbor].ispisiListuZrakoplova();
+
 
             } while (true);
         }

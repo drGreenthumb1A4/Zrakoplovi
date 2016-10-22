@@ -93,5 +93,9 @@ namespace ConsoleApplication2
             }
         }
 
+        public void UnesiAvion(Zrakoplov zrakoplov)
+        {
+            Zrako
+        }
     }
 }
