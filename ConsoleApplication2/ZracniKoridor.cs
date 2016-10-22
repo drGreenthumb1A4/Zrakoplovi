@@ -52,7 +52,7 @@ namespace ConsoleApplication2
             }
             for(int i = 0; i<zrakoplovi.Length; i++)
             {
-                if (zrakoplovi[i].visina == zrakoplov.visina && zrakoplovi[i] != null)
+                if (zrakoplovi[i]!=null && zrakoplovi[i].visina == zrakoplov.visina)
                 {
                     return false;
                 }
@@ -63,6 +63,7 @@ namespace ConsoleApplication2
                 {
                     zrakoplovi[i] = zrakoplov;
                     brojZrakoplova++;
+                    return true;
                 }
             }
 
@@ -80,22 +81,81 @@ namespace ConsoleApplication2
                 }
                 
             }
-            return true;
+            return false;
         }
         public void ispisiListuZrakoplova()
         {
             for (int i = 0; i < zrakoplovi.Length; i++)
             {
-                Console.WriteLine("Zrakoplov broj " + i);
-                Console.WriteLine("Registracija: " + zrakoplovi[i].registracija);
-                Console.WriteLine("Destinacija: " + zrakoplovi[i].destinacija);
-                Console.WriteLine("Visina: " + zrakoplovi[i].visina);
+                if (zrakoplovi[i] != null)
+                {
+                    Console.WriteLine("------------------------------------------");
+                    Console.WriteLine("Zrakoplov broj " + (i + 1));
+                    Console.WriteLine("Registracija: " + zrakoplovi[i].registracija);
+                    Console.WriteLine("Destinacija: " + zrakoplovi[i].destinacija);
+                    Console.WriteLine("Visina: " + zrakoplovi[i].visina);
+                    Console.WriteLine("------------------------------------------");
+                }
             }
         }
 
-        public void UnesiAvion(Zrakoplov zrakoplov)
+        public Zrakoplov UnesiSvojstva()
         {
-            Zrako
+            Console.WriteLine("Unesi registraciju zrakoplova");
+            string reg = Console.ReadLine();
+            Console.WriteLine("Unesi destinaciju zrakoplova");
+            string dest = Console.ReadLine();
+            Console.WriteLine("Unesi visinu zrakoplova");
+            int vis = int.Parse(Console.ReadLine());
+            Zrakoplov zrakoplov = new Zrakoplov(reg, dest, vis);
+            return zrakoplov;
         }
+
+        public void Menu()
+        {
+            
+            do
+            {
+                ispisiListuZrakoplova();
+                Console.WriteLine("------------------------------------------");
+                Console.WriteLine("Za unos zrakoplova upisite 1");
+                Console.WriteLine("Za brisanje zrakoplova upisite 2");
+                Console.WriteLine("Za izlazak u glavni menu upisite 3");
+                Console.WriteLine("------------------------------------------");
+
+                string unos = Console.ReadLine();
+
+                if(unos == "1")
+                {
+                    Zrakoplov uneseniZrakoplov = UnesiSvojstva();
+                    bool uspjesno = DodajZrakoplov(uneseniZrakoplov);
+                    if (!uspjesno)
+                    {
+                        Console.WriteLine("Unos nije moguc");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Zrakoplov dodan");
+                    }
+                }
+                if (unos == "2") 
+                {
+                    Console.WriteLine("Unesite registraciju");
+                    string registracija = Console.ReadLine();
+                    bool uspjesno = UkloniZrakoplov(registracija);
+                    if (!uspjesno)
+                    {
+                        Console.WriteLine("Uklonjanje nije uspjesno");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Uklanjanje uspjesno");
+                    }
+                }
+                if (unos == "3") break;
+
+            } while (true);
+        }
+        
     }
 }

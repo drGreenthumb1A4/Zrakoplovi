@@ -11,5 +11,11 @@ namespace ConsoleApplication2
         public string registracija;
         public string destinacija;
         public int visina;
+        public Zrakoplov(string reg, string dest, int vis)
+        {
+            registracija = reg;
+            destinacija = dest;
+            visina = vis;
+        }
     }
 }
